@@ -12,3 +12,9 @@ li.channel > img {
     max-height: 100px;
     overflow-y: scroll;
 }
+
+.channel-link { 
+    cursor:pointer;
+    color:blue;
+    text-decoration:underline;
+}
