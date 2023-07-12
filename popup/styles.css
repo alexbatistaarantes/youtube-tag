@@ -1,0 +1,14 @@
+/* Channel icon in list of channels */
+li.channel > img {
+    height: 1.4em;
+}
+
+#tags > ul {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+#tags > ul > li > ul {
+    max-height: 100px;
+    overflow-y: scroll;
+}

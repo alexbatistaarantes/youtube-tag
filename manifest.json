@@ -1,0 +1,28 @@
+{
+    "manifest_version": 2,
+    "name": "YouTube-Tag",
+    "version": "1.0",
+
+    "description": "Tag YouTube channels",
+    "homepage_url": "https://github.com/alexbatistaarantes/youtube-tag",
+
+    "permissions": [
+        "activeTab",
+        "storage",
+        "scripting",
+        "*://*.youtube.com/@*"
+    ],
+
+    "browser_action": {
+        "default_icon": "icons/icon.png",
+        "default_title": "YouTube-Tag",
+        "default_popup": "popup/index.html"
+    },
+
+    "content_scripts": [
+        {
+          "matches": ["*://*.youtube.com/@*"],
+          "js": ["content_scripts/parser.js"]
+        }
+    ]
+}
