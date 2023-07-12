@@ -41,7 +41,6 @@ async function init(){
     const tabs = await browser.tabs.query({currentWindow: true, active: true});
     const tab = tabs[0];
     if(/.*:\/\/.*youtube.com\/@.*/.test(tab.url)){
-        
         // Just obtain the user for now
         activeChannel.user = tab.url.match(/.*:\/\/.*youtube.com\/@([\w\.-]*)/)[1];
         activeChannel.url = `https://www.youtube.com/@${activeChannel.user}`;
@@ -119,7 +118,7 @@ function createChannelsList(tag){
 
         // Create list item
         const listItem = document.createElement("li");
-        listItem.setAttribute("class", "channel");
+        listItem.classList.add("channel");
         // Add button to remove from tag
         const button = document.createElement("button");
         button.innerText = "-";
@@ -133,6 +132,7 @@ function createChannelsList(tag){
         
         // Add link
         const link = document.createElement("span");
+        link.classList.add("channel-link");
         // Event to open channel URL in new tab, since I can't figure it out how to use links in popup (guess you can't)
         link.innerText = channel.user;
         link.addEventListener('click', () => browser.tabs.create({url: channel.url}));
