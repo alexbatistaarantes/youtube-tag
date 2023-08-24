@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 ////////////////////////////////////////////////////////////////////////////////////////
-// CONTROL
+// CONTROL & FUNCTIONALITIES
 
 // if current tab is a channel page
 let isChannelPage = false;
@@ -88,6 +88,18 @@ async function untagChannel(tag, channel){
     await saveData();
 }
 
+function searchVideo(text, tag){
+    const query = `site:youtube.com/watch ${text} ${tags[tag].join(" OR ")}`;
+    const url = `https://www.google.com/search?q=${query}`;
+    browser.tabs.create({url: url});
+}
+
+function searchIndividually(text, tag){
+    for(let channel of tags[tag]){
+        const url = `https://www.youtube.com/@${channel}/search?query=${text}`;
+        browser.tabs.create({url: url});
+    }
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////
 // INTERFACE
@@ -97,7 +109,8 @@ const newTagButton = document.querySelector("#new-tag > button");
 
 const searchVideoText = document.querySelector("#search-video input");
 const searchVideoTag = document.querySelector("#search-video select");
-const searchVideoButton = document.querySelector("#search-video button");
+const searchVideoButton = document.querySelector("#search-in-channels");
+const searchIndividuallyButton = document.querySelector("#search-in-each-individually");
 
 // Event to when button to new tag is clicked
 newTagButton.addEventListener("click", () => handler('newTag', {tag: newTagInput.value}));
@@ -107,6 +120,12 @@ searchVideoButton.addEventListener("click",
         text: searchVideoText.value,
         tag: searchVideoTag.value
     })
+);
+searchIndividuallyButton.addEventListener("click",
+() => handler('searchIndividually', {
+    text: searchVideoText.value,
+    tag: searchVideoTag.value
+})
 );
 
 // Return UL list of channels
@@ -204,12 +223,6 @@ function fillTagSelect(){
     }
 }
 
-function searchVideo(text, tag){
-    const query = `site:youtube.com/watch ${text} ${tags[tag].join(" OR ")}`;
-    const url = `https://www.google.com/search?q=${query}`;
-    browser.tabs.create({url: url});
-}
-
 // Handle actions triggered by the interface
 function handler(action, data={}){
     const actions = {
@@ -217,7 +230,8 @@ function handler(action, data={}){
         'untag': () => untagChannel(data.tag, data.channel),
         'newTag': () => newTag(data.tag),
         'deleteTag': () => deleteTag(data.tag),
-        'searchVideo': () => searchVideo(data.text, data.tag)
+        'searchVideo': () => searchVideo(data.text, data.tag),
+        'searchIndividually': () => searchIndividually(data.text, data.tag)
     }
     actions[action]();
 
