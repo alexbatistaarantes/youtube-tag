@@ -57,8 +57,10 @@ async function newTag(name){
     }
 }
 async function deleteTag(name){
-    delete tags[name];
-    await saveData();
+    if(confirm(`Are you sure you want to delete the tag ${name}?`)){
+        delete tags[name];
+        await saveData();
+    }
 }
 
 // Add tag channel
@@ -101,6 +103,14 @@ function searchIndividually(text, tag){
     }
 }
 
+function extractData(){
+    const jsonData = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(tags));
+    const downloader = document.createElement('a');
+    downloader.setAttribute("href", jsonData);
+    downloader.setAttribute("download", "youtube-tag.json");
+    downloader.click();
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////
 // INTERFACE
 
@@ -112,6 +122,8 @@ const searchVideoTag = document.querySelector("#search-video select");
 const searchVideoButton = document.querySelector("#search-in-channels");
 const searchIndividuallyButton = document.querySelector("#search-in-each-individually");
 
+const extractDataButton = document.querySelector("#extract-data button");
+
 // Event to when button to new tag is clicked
 newTagButton.addEventListener("click", () => handler('newTag', {tag: newTagInput.value}));
 // Event to when button to search video is clicked
@@ -122,11 +134,13 @@ searchVideoButton.addEventListener("click",
     })
 );
 searchIndividuallyButton.addEventListener("click",
-() => handler('searchIndividually', {
-    text: searchVideoText.value,
-    tag: searchVideoTag.value
-})
+    () => handler('searchIndividually', {
+        text: searchVideoText.value,
+        tag: searchVideoTag.value
+    })
 );
+// Event to when extract data button is clicked
+extractDataButton.addEventListener("click", () => handler('extractData'));
 
 // Return UL list of channels
 function createChannelsList(tag){
@@ -231,7 +245,8 @@ function handler(action, data={}){
         'newTag': () => newTag(data.tag),
         'deleteTag': () => deleteTag(data.tag),
         'searchVideo': () => searchVideo(data.text, data.tag),
-        'searchIndividually': () => searchIndividually(data.text, data.tag)
+        'searchIndividually': () => searchIndividually(data.text, data.tag),
+        'extractData': () => extractData()
     }
     actions[action]();
 

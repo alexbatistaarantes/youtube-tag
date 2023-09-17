@@ -6,6 +6,12 @@
     "description": "Tag YouTube channels",
     "homepage_url": "https://github.com/alexbatistaarantes/youtube-tag",
 
+    "browser_specific_settings": {
+        "gecko": {
+          "id": "youtube-tag@alexbatistaarantes"
+        }
+    },
+
     "permissions": [
         "activeTab",
         "storage",
