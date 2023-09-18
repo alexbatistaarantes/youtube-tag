@@ -1,9 +1,9 @@
 {
     "manifest_version": 2,
     "name": "YouTube-Tag",
-    "version": "1.0",
+    "version": "1.1",
 
-    "description": "Tag YouTube channels",
+    "description": "Create tags for YouTube channels, allowing an easier navigation and better search",
     "homepage_url": "https://github.com/alexbatistaarantes/youtube-tag",
 
     "browser_specific_settings": {
@@ -11,6 +11,13 @@
           "id": "youtube-tag@alexbatistaarantes"
         }
     },
+    
+    "updates": [
+        {
+          "version": "1.1",
+          "update_link": "https://github.com/alexbatistaarantes/youtube-tag/youtube-tag.xpi"
+        }
+	],
 
     "permissions": [
         "activeTab",
