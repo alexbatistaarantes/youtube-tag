@@ -14,7 +14,7 @@ Works as an alternative list of subscriptions, where you can more easily find ch
 
 ### Install
 <div id="install-firefox" class="install-ok">
-  <a href="/alexbatistaarantes/youtube-tag/raw/main/youtube-tag.xpi">
+  <a href="https://github.com/alexbatistaarantes/youtube-tag/raw/main/youtube-tag.xpi">
     Firefox
   </a>
 </div>
