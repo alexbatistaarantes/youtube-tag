@@ -1,6 +1,8 @@
 # youtube-tag
 Extension to tag channels in YouTube
 
+[Source Code](https://github.com/alexbatistaarantes/youtube-tag)
+
 ## Version 1:
 Works as an alternative list of subscriptions, where you can more easily find channels by topic
 ### Features
